@@ -57,6 +57,40 @@ class Cola{
       push(n.dato);  
     }
 
+int promedio(){
+      int acum=0;
+      int contador=0;
+      Nodo *aux = inicio;
+      while(aux){
+        acum+=aux->dato;
+        aux=aux->sig;
+        contador++;
+      }
+      return acum/contador;
+    }
+    int Longitud(){
+      Nodo *aux= inicio;
+      int cont=0;
+      while(aux){
+        aux= aux->sig;
+        cont++;
+      }
+      return cont;
+    }
+
+    int getPos(int pos){
+      Nodo *aux= inicio;
+      int cont=0;
+      while(aux){
+        if(cont ==pos){
+          return aux->dato;
+        }
+        aux = aux->sig;
+        cont++;
+      }
+      return 0;
+    }
+
 
     Cola(){
       inicio= NULL;
@@ -64,6 +98,17 @@ class Cola{
   
 };
 
+Cola anniadirMultiplos(Cola cola1, int prom){
+  Cola newCola;
+  int lenght = cola1.Longitud();
+  for(int i=0; i<lenght; i++){
+      int dato= cola1.getPos(i);
+      if(dato%prom == 0){
+          newCola.push(dato);
+      }
+  }
+  return newCola;
+}
 
 
 int main() {
@@ -75,4 +120,9 @@ int main() {
   cola1.push(6);
   cola1.invertir();
   cola1.mostrarCola();
+
+int promedioCola1= cola1.promedio();
+  Cola cola2;
+  cola2 = anniadirMultiplos(cola1, promedioCola1);
+  cola2.mostrarCola();
 }
